@@ -128,6 +128,7 @@ RESET;
 		</form>
 	
 		<?php
+		 echo "as";
 		$con = mysql_connect("localhost","root","");
 		if (!$con)
 		
