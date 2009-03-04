@@ -142,37 +142,44 @@ RESET;
 		VALUES
 		('$_SESSION[tries]','$_POST[guess]')";
 		
-		$RESULT = mysql_query("SELECT * FROM number_guessed");
-		
 			if (!mysql_query($sql,$con)){
 				die ('error:' .mysql_error());
-		
-		echo "table border='2'>
-		<tr>
-		<th>GUESSES<th>
-		</tr>";
-		
-			while($row = mysql_fetch_array($RESULT))
-		{
-			echo "<tr>";
-			echo "<td>" . $row['number_guessed'] . "</td>";
-		  echo "</tr>";
-		}
-		echo "</table>";
-		}
-
+      }
 
 		mysql_close($con);
 
 		?>
+
+		<?php
+		$con = mysql_connect ("localhost","root","");
+			if (!$con)
+				{
+					die('could not connect: ' . mysql_error());
+				}
+
+			mysql_select_db("blahblah_db", $con);
+
+				$result = mysql_query("SELECT * FROM guess_data");
+
+				echo "<table border='1'>
+				<tr>
+				<th>try</th>
+				<th>number guessed</th>
+				</tr>";
+
+				while($row = mysql_fetch_array($result))
+				{
+					echo "<tr>";
+					echo "<td>" . $row['guess_number'] . "</td>";
+					echo "<td>" . $row['number_guessed'] . "</td>";
+					echo "</tr>";
+					}
+			echo "</table>";
+
+		mysql_close($con);
+		?>
 	
 	
-	
-	
-	
-	
+
 	</body>
 </html>
-
-
-
