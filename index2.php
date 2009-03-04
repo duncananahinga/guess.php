@@ -2,11 +2,11 @@
 	$guess = $_REQUEST["guess"];
 	session_start();
 	
-		// if (!$_SESSION["tries"]){
-		// 		$_SESSION["tries"]==0;
-		// 	}
-		
-	// $tries= "Try Number ".$_SESSION["tries"];
+		if (!$_SESSION["tries"]){
+						$_SESSION["tries"]==0;
+					}
+				
+			$tries = $_SESSION["tries"];
 	$guessed= "Your Last Guess: " . $guess;
 	$game= $_SESSION['game'];
 	
@@ -39,14 +39,13 @@ FORM;
 			
 			if ($guess > $_SESSION["number_to_guess"]){ 
 				echo "LOWER";
-					// $_SESSION["tries"]=$_SESSION["tries"]+1;
+					$_SESSION["tries"]=$_SESSION["tries"]+1;
 				$response = "LOWER<img src='Man_with_candles.gif'/><p>";	
 					                       
 			}
 			
 			elseif ($guess == $_SESSION["number_to_guess"]){									
-						// echo "It Took You "	. $_SESSION["tries"]=$_SESSION["tries"]+1 ." Tries";             
-				// unset($_SESSION['tries']);
+						echo "It Took You "	. $_SESSION["tries"]=$_SESSION["tries"]+1 ." Tries";            
 				unset($_SESSION['number_to_guess']);
 				$show_form = "";
 				
@@ -77,13 +76,14 @@ FORM;
 					</form>
 					<img src="Happy_Kwanzaa_2.gif"/>
 				 Great Job, Would You Like To Play <a href='?reset=true'>Again</a>
-			
 RESET;
-				// $_SESSION["tries"]=$_SESSION["tries"]+1;
+			
+			unset($_SESSION['tries']);
+			
 			}
 		  elseif ($guess < $_SESSION["number_to_guess"]){
 				$response = "HIGER <img src='Boy.gif'/> <p>";
-			// $_SESSION["tries"]=$_SESSION["tries"]+1;	
+			$_SESSION["tries"]=$_SESSION["tries"]+1;	
 			}
 		}
 	}
@@ -105,7 +105,7 @@ RESET;
 		
 		<?php echo $show_form; ?>
 		<?php echo $response; ?>
-		<!-- <?PHP echo $tries; ?> -->
+		<?PHP echo $tries; ?>
 		<br>
 		<?PHP echo $guessed; ?>		
 		
