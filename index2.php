@@ -2,6 +2,7 @@
 	$guess = $_REQUEST["guess"];
 	session_start();
 	
+
 		if (!$_SESSION["tries"]){
 						$_SESSION["tries"]==0;
 					}
@@ -19,6 +20,9 @@
 			<input type="text" id="guess" name="guess" value="" />
 			<input type="submit" value="GUESS" />
 		</form>
+		<script type="text/javascript" charset="utf-8">
+			document.getElementById('guess').focus();
+		</script>
 FORM;
 
 	$show_form = $guess_form;
@@ -27,17 +31,14 @@ FORM;
 		if (!$guess){
 			$response = "TAKE A GUESS<br>";			
 		}
-		elseif ($guess>50){
-			$response="Please Guess A Number BETWEEN 1 and 50"."<br />";		
-		}
-		elseif ($guess<1){
-			$response="Please Guess A Number BETWEEN 1 and 50"."<br />";
+		
+		elseif ($guess <= 0 || $guess > 50){
+			$response = "Please Enter A Number Between 1 and 50 ";
 		}
 		
 	else { 
 			
 			if ($guess > $_SESSION["number_to_guess"]){ 
-				echo "LOWER";
 					$_SESSION["tries"]=$_SESSION["tries"]+1;
 				$response = "LOWER<img src='Man_with_candles.gif'/><p>";	
 					                       
@@ -90,7 +91,6 @@ RESET;
 			$_SESSION["number_to_guess"]=rand(1,50);
 	}
 	
-	
 ?>
 
 
@@ -100,8 +100,8 @@ RESET;
 		<title> GUESS THAT NUMBER PAGE TWO   </title> 
 </head>
 
-	<body>
-		
+	<body onunload ="alert('THANK YOU FOR PLAYING!')">
+	
 		<?php echo $show_form; ?>
 		<?php echo $response; ?>
 		<br>
@@ -125,10 +125,10 @@ RESET;
 		onClick="displaymessage();" >
 		</form>
 	
-		<?php
+	<?php	
 		$con = mysql_connect("localhost","root","");
 		if (!$con)
-		
+
 		  {
 		  die('Could not connect: ' . mysql_error());
 		  }
@@ -138,15 +138,14 @@ RESET;
 		$sql="insert into guess_data (guess_number,number_guessed)
 		VALUES
 		('$_SESSION[tries]','$_POST[guess]')";
-		
+
 			if (!mysql_query($sql,$con)){
 				die ('error:' .mysql_error());
-      }
+	    }
 
-		mysql_close($con);
-
-		?>
-
+			mysql_close($con);
+?>
+	
 		<?php
 		$con = mysql_connect ("localhost","root","");
 			if (!$con)
@@ -177,6 +176,8 @@ RESET;
 		?>
 	
 	
-
+	
+	
+	
 	</body>
 </html>
