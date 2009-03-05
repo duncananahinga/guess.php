@@ -17,7 +17,7 @@
 			<fieldset id="GUESS">
 			<label>Enter Guess Here:</label>
 			<p id="buttons">
-			<input type="text" id="guess" name="guess" value="" />
+			<input type="text" id="guess" name="guess" value=""/>
 			<input type="submit" value="GUESS" />
 		</form>
 		<script type="text/javascript" charset="utf-8">
@@ -100,7 +100,7 @@ RESET;
 		<title> GUESS THAT NUMBER PAGE TWO   </title> 
 </head>
 
-	<body onunload ="alert('THANK YOU FOR PLAYING!')">
+	<body>
 	
 		<?php echo $show_form; ?>
 		<?php echo $response; ?>
